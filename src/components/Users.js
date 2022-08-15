@@ -26,6 +26,21 @@ class Users extends Component {
 		}
 	}
 
+	/*사용자가 없는 경우 error 발생*/
+	componentDidUpdate(prevProps, prevState, snapshot) {
+		/* 만약 users 컴포넌트에서 오류를 해결하지않고 부모컴포넌트에서 처리하고싶다면 try catch 문은 사용할 수없다
+		-정규 js 문장을 사용하는 곳에서만 쓸 수 있기 떄문,
+		try {
+
+		}catch (error) {
+
+		}*/
+		if (this.props.users.length === 0){
+			throw new Error('no users provided')
+		}
+	}
+
+
 	toggleUsersHandler() {
 		/*새로운 상태를 갖는 객체 대신에 이 갱신 함수를 setState 에 전달합니다 만약 새로운 상태가 이전 상태에 의존한다면 그 역시 이런 방법을 사용*/
 		this.setState((curState)=> {
