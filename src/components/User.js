@@ -4,6 +4,11 @@ import classes from './User.module.css';
 /*class 예약어 클래스이름 클래스 정의 내용이있는 중괄호*/
 class User extends Component {
 
+
+  componentWillMount() {
+    console.log('User will mount func call')
+  }
+
   /*render method 는 리액트에 필요한 특정 메소드로 리액트가 jsx 코드 안에 컴포넌트가 사용된것을 확인하면 호출하는 메소드*/
   render (){
     return (

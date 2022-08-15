@@ -1,4 +1,4 @@
-import {Fragment, useState, useEffect, Component} from 'react';
+import {Fragment, Component} from 'react';
 import classes from './UserFinder.module.css'
 import Users from './Users';
 
@@ -12,9 +12,18 @@ class UserFinder extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			filteredUsers: DUMMY_USERS,
+			filteredUsers: [],
 			searchTerm: '',
 		}
+	}
+
+	/*컴포넌트가 처음 렌더링 될때만 실행
+	* -HTTP 요청을 보내고 다룰 수 있음*/
+	componentDidMount() {
+		/*SERVER 에서 가져온 유저들 정보 설정*/
+		this.setState({
+			filteredUsers: DUMMY_USERS,
+		})
 	}
 
 	/*리액트에 의해 state 변화로 인해 컴포넌트가 재평가되게 되면 자동적으로 호출*/
