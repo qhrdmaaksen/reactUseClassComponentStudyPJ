@@ -5,7 +5,7 @@ import classes from './User.module.css';
 class User extends Component {
 
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     console.log('User will mount func call')
   }
 

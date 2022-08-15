@@ -1,14 +1,19 @@
 import {Fragment, Component} from 'react';
 import classes from './UserFinder.module.css'
 import Users from './Users';
+import UsersContext from '../store/users-context'
 
-const DUMMY_USERS = [
+/*const DUMMY_USERS = [
 	{id: 'u1', name: 'Max'},
 	{id: 'u2', name: 'Manuel'},
 	{id: 'u3', name: 'Julie'},
-];
+];*/
 
 class UserFinder extends Component {
+	/*리액트에게 이 컴포넌트는 UsersContext 라는 컨텍스트에 접근할 수 있다고 전달하는 것
+	* -static contextType 는 단 한 번만 설정할 수 있으므로, 동시에 연결해야 하는 2개의 컨텍스트가 있다면 이 것이 아닌 다른 방법을 찾아봐야 함*/
+	static contextType = UsersContext
+
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -22,7 +27,7 @@ class UserFinder extends Component {
 	componentDidMount() {
 		/*SERVER 에서 가져온 유저들 정보 설정*/
 		this.setState({
-			filteredUsers: DUMMY_USERS,
+			filteredUsers: this.context.users, /*위에서 contextType 를 UsersContext 로 지정해줬기에 this.context.users 로 users-context 에 접근해 users 에 연결함*/
 		})
 	}
 
@@ -32,7 +37,7 @@ class UserFinder extends Component {
 		따라서 상태 갱신이 이루어지지 않으니무한 루프 역시 발생하지 않음
 		-함수형 컴포넌트는 의존성 배열을 명시 해주므로 아래와 같이 조건문을 넣어줄 필요가 없다*/
 		if(prevState.searchTerm !== this.state.searchTerm){ /*이전 상태와 현재 상태가 달라지면 실행*/
-		this.setState({filteredUsers: DUMMY_USERS.filter((user) => user.name.includes(this.state.searchTerm))})
+		this.setState({filteredUsers: this.context.users.filter((user) => user.name.includes(this.state.searchTerm))})
 		}
 	}
 
